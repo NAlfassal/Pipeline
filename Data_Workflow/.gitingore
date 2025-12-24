@@ -1,0 +1,9 @@
+venv/
+processed/
+__pycache__/
+*.pyc
+.python-version
+src/data_workflow/quality.py
+
+# Ignore embedded git repository
+csv-profiler/
