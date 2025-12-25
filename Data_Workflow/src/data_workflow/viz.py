@@ -4,7 +4,7 @@ from pathlib import Path
 def bar_sorted(df, x, y, title):
     df_plot = df.sort_values(by=y, ascending=False)
     fig = px.bar(df_plot, x=x, y=y, title=title, template="plotly_white")
-    fig.update_layout(title_x=0.05) # تحريك العنوان قليلاً لليسار
+    fig.update_layout(title_x=0.05) 
     return fig
 
 def time_line(df, x, y, title):
