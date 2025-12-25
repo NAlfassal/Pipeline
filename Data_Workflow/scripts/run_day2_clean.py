@@ -16,7 +16,7 @@ from data_workflow.transformers import enforce_schema, missingness_report, add_m
 from data_workflow.quality import require_columns, assert_non_empty, assert_unique_key, assert_in_range
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-logger = logging.getLogger("DataPipeline")
+logger = logging.getLogger("DataCleaner")
 
 def main():
     paths = make_paths(ROOT)
