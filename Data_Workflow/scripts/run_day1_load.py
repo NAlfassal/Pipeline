@@ -1,12 +1,3 @@
-"""
-Day 1 Data Loading Pipeline
-This script performs initial ETL operations:
-- Loads raw orders and users data from CSV files
-- Applies data validation and schema enforcement
-- Transforms and exports data to Parquet format
-- Generates metadata (record counts, processing timestamp)
-"""
-
 import sys
 from pathlib import Path
 import logging

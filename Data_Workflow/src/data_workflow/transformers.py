@@ -30,6 +30,11 @@ def normalize_text(s: pd.Series) -> pd.Series:
         .str.casefold()
         .str.replace(_ws, " ", regex=True)
     )
-#def apply_mapping(s: pd.Series, mapping: dict[str, str]) -> pd.Series:
-     #- Map values using a dictionary
-     #- Values not in mapping stay unchanged
+
+def apply_mapping(s: pd.Series, mapping: dict[str, str]) -> pd.Series:
+     return s.map(lambda x: mapping.get(x, x))
+
+def dedupe_keep_latest(df: pd.DataFrame, key_cols: list[str], ts_col: str) -> pd.DataFrame:
+    sort_df = df.sort_values(by=ts_col, ascending=False)
+    deduped_df = sort_df.drop_duplicates(subset=key_cols, keep="first")
+    return deduped_df.sort_index()
