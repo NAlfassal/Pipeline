@@ -9,6 +9,7 @@ def require_columns(df: pd.DataFrame, cols: list[str]) -> None :
 def assert_non_empty(df: pd.DataFrame, name: str = "df") -> None:
     if df.empty:
         raise ValueError(f"The DataFrame '{name}' is empty.")
+    
 
 def assert_unique_key(df: pd.DataFrame, key: str, *, allow_na: bool = False) -> None:
     if not allow_na:
