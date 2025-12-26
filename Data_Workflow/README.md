@@ -1,47 +1,81 @@
-Project description:
-- Data Workflow: a small project for building a simple data processing pipeline — load raw data, clean and transform it, build analytics tables, and produce reports/figures.
+# Data Workflow Pipeline
+A modular data processing pipeline designed to load raw data, perform quality checks, transform datasets, and generate visual insights. Built as part of the **AI Professionals Bootcamp**.
 
-Requirements:
-- Python 3.13 
-- A virtual environment (venv) 
+## Project Overview
+This pipeline follows a sequential ETL (Extract, Transform, Load) process:
+1. **Load:** Converts raw CSV files to efficient Parquet format.
+2. **Clean:** Handles missing values, text normalization, and deduplication.
+3. **Transform:** Builds an analytics-ready table by joining datasets and handling outliers.
+4. **Analyze:** Exploratory Data Analysis (EDA) and Bootstrap uncertainty quantification.
 
-Clone and install:
-1. Clone the repository:
+## Project Structure
+```text
+Pipeline/
+├── data/               # Raw and processed datasets
+├── notebooks/          # EDA notebooks (eda.ipynb)
+├── scripts/            # Pipeline execution scripts (Day 1-3)
+├── src/data_workflow/  # Core library modules
+│   ├── config.py       # Path management
+│   ├── io.py           # Data I/O helpers
+│   ├── quality.py      # Quality & Fail-fast checks
+│   ├── transformers.py # Cleaning & logic
+│   ├── joins.py        # Safe join utilities
+│   ├── viz.py          # Plotly visualization helpers
+│   └── utils.py        # Statistical utilities
+└── reports/            # Generated figures and audit reports
+```
 
-git clone https://github.com/NAlfassal/Pipeline.git
-cd Pipeline
-2. Create and activate a virtual environment, then install dependencies (reads `pyproject.toml`):
+## Requirements
+* **Python 3.13**
+* **Virtual Environment (venv)**
+* **Dependencies:** pandas, pyarrow, plotly, kaleido, numpy.
 
-Windows (PowerShell):
-python -m venv .venv
-.\.venv\Scripts\Activate
+## Clone and Install
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/NAlfassal/Pipeline.git 
+   cd Pipeline
+   ```
 
-Linux / macOS:
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install .
+2. **Setup Virtual Environment:**
 
-Features:
-- Load raw CSV/parquet from `data/raw` and write processed outputs to `data/processed`.
-- Cleaning and transformation utilities in `src/data_workflow/transformers.py`.
-- Data quality checks in `src/data_workflow/quality.py`.
-- IO helpers in `src/data_workflow/io.py` (read/write parquet, csv).
-- Visualization helpers and example notebook in `src/data_workflow/viz.py` and `notebooks/eda.ipynb`.
-overview:
-- Scripts for sequential runs are in `scripts/`.
-- Reusable library code is in `src/data_workflow/` with modules for IO, transforms, quality checks, and visualization.
+   **Windows (PowerShell):**
+   ```powershell
+   python -m venv .venv
+   .\.venv\Scripts\Activate
+   pip install .
+   ```
 
-How to run:
-- Run the pipeline scripts in order:
+   **Linux / macOS:**
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate
+   pip install .
+   ```
 
-powershell:
+   *Note for `uv` users: You can simply run `uv sync` to set up the environment.*
+
+##  How to Run
+Run the pipeline scripts in order to process the data:
+
+```powershell
 python scripts/run_day1_load.py
 python scripts/run_day2_clean.py
 python scripts/run_day3_build_analytics.py
+```
 
-- Open the exploratory notebook (install Jupyter if needed):
-python -m pip install jupyter
+### Exploratory Data Analysis
+To view charts and reports, open the notebook:
+```bash
+# Install jupyter if not present
+pip install jupyter
+# Run the notebook
+jupyter notebook notebooks/eda.ipynb
+```
 
-Notes for `uv` users:
-you can directly write : uv sync 
-to create venv with the dependencies .
+## Key Features
+* **Modular Code:** Separation of concerns between I/O, quality checks, and transformations.
+* **Fail-Fast Checks:** Validates column existence, uniqueness, and value ranges early in the process.
+* **Safe Joins:** Validates cardinality (many-to-one) to prevent data duplication.
+* **Automated Viz:** Includes helpers to generate and export publication-ready Plotly charts.
+* **Statistical Rigor:** Includes a Bootstrap function to compute confidence intervals for group comparisons.
